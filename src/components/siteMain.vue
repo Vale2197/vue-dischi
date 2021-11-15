@@ -3,7 +3,10 @@
         <div class="container-fluid">
             <div class="row px-3">
                  <singleCard v-for="disco in dischiList" :key="disco.author"
-                   :immagine="disco.poster" />
+                   :immagine="disco.poster" 
+                    :titolo="disco.title"
+                    :author="disco.author"
+                    :year="disco.year"/>
             </div>
         </div>
     </main>
@@ -43,5 +46,13 @@ export default{
 </script>
 
 <style lang="scss">
-
+    main {
+        color: white;
+        .row {
+            padding: 6rem 0;
+            p {
+                margin: 0;
+            }
+        }
+    }
 </style>
