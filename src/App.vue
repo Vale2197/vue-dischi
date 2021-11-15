@@ -21,4 +21,8 @@ export default {
 @import "../node_modules/bootstrap";
 @import "./assets/variabili.scss";
 
+body {
+  background-color: $bg_body;
+}
+
 </style>
