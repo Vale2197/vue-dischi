@@ -1,18 +1,20 @@
 <template>
   <div id="app">
     <siteHeader/>
-   <!--  <siteMain/> -->
+    <siteMain/>
     <!-- <siteFooter/> -->
   </div>
 </template>
 
 <script>
 import siteHeader from "./components/siteHeader.vue"
+import siteMain from "./components/siteMain.vue"
 
 export default {
   name: 'App',
   components: {
-    siteHeader
+    siteHeader,
+    siteMain
   }
 }
 </script>
