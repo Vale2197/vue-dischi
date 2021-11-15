@@ -65,6 +65,7 @@ export default {
             
             .description {
                 color: #777e7d;
+                margin-top: 1.5rem;
             }
 
 
