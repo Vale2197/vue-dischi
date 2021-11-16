@@ -6,27 +6,27 @@
                     Ricerca per genere: 
                 </span>
                 <select @change="change_genre($event)" name="select" id="select_genere">
-                        <option value="1">
+                        <option value="all">
                             Mostra tutto
                         </option>
                         <!--  -->
 
-                        <option value="2">
+                        <option value="Rock">
                             Rock
                         </option>
                         <!--  -->
 
-                        <option value="3">
+                        <option value="Pop">
                             Pop
                         </option>
                         <!--  -->
 
-                        <option value="4">
+                        <option value="Jazz">
                             Jazz
                         </option>
                         <!--  -->
 
-                        <option value="5">
+                        <option value="Metal">
                             Metal
                         </option>
                         <!--  -->
@@ -34,7 +34,7 @@
                 </select>
             </div>
 
-            <div v-if="dischiList.length == 10 && select_genre == 1" class="row px-3">
+            <div v-if="dischiList.length == 10 && select_genre == 'all' " class="row px-3">
                  <singleCard v-for="disco in dischiList" :key="disco.author"
                    :immagine="disco.poster" 
                     :titolo="disco.title"
@@ -42,7 +42,7 @@
                     :year="disco.year"
                 />
             </div>
-            <div v-else-if="select_genre > 1" class="row">
+            <div v-else-if="filterList.length > 0 " class="row">
                 <singleCard v-for="disco in filterList" :key="disco.author"
                    :immagine="disco.poster" 
                     :titolo="disco.title"
@@ -78,7 +78,7 @@ export default{
      data() {
         return {
             dischiList: [], 
-            select_genre: 1,
+            select_genre: "all",
         }
     },
     mounted() {
@@ -97,23 +97,14 @@ export default{
 
     methods: {
         change_genre(event) {
-            this.select_genre = parseInt(event.target.value); 
+            this.select_genre = event.target.value.toLowerCase(); 
             console.log(this.select_genre);
         }
     },
     computed: {
         filterList() {
            return this.dischiList.filter((disco) => {
-                if(this.select_genre == 2 && disco.genre == "Rock") {
-                   return disco
-                }
-                else if(this.select_genre == 3 && disco.genre == "Pop") {
-                   return disco
-                }
-                else if(this.select_genre == 4 && disco.genre == "Jazz") {
-                   return disco
-                }
-                else if(this.select_genre == 5 && disco.genre == "Metal") {
+                if(this.select_genre == disco.genre.toLowerCase()) {
                    return disco
                 }
             })
