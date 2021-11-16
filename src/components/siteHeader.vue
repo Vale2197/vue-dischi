@@ -1,14 +1,9 @@
 <template>
     <header>
         <div class="container-fluid">
-            <div class="row p-3">
-                <div class="logo">
+            <div class="row justify-content-between align-items-center p-3">
+                <div class="logo col-2">
                     <img class="img-fluid" src="../assets/Spotify_logo_without_text.svg" alt="logospotify">
-                </div>
-                <div class="my_select">
-                    <select name="select" id="select_genere">
-                        
-                    </select>
                 </div>
             </div>
         </div>

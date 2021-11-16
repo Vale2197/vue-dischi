@@ -1,12 +1,54 @@
 <template>
     <main>
         <div class="container-fluid">
-            <div v-if="dischiList.length == 10" class="row px-3">
+            <div class="my_select col-12">
+                <span>
+                    Ricerca per genere: 
+                </span>
+                <select @change="change_genre($event)" name="select" id="select_genere">
+                        <option value="1">
+                            Mostra tutto
+                        </option>
+                        <!--  -->
+
+                        <option value="2">
+                            Rock
+                        </option>
+                        <!--  -->
+
+                        <option value="3">
+                            Pop
+                        </option>
+                        <!--  -->
+
+                        <option value="4">
+                            Jazz
+                        </option>
+                        <!--  -->
+
+                        <option value="5">
+                            Metal
+                        </option>
+                        <!--  -->
+
+                </select>
+            </div>
+
+            <div v-if="dischiList.length == 10 && select_genre == 1" class="row px-3">
                  <singleCard v-for="disco in dischiList" :key="disco.author"
                    :immagine="disco.poster" 
                     :titolo="disco.title"
                     :author="disco.author"
-                    :year="disco.year"/>
+                    :year="disco.year"
+                />
+            </div>
+            <div v-else-if="select_genre > 1" class="row">
+                <singleCard v-for="disco in filterList" :key="disco.author"
+                   :immagine="disco.poster" 
+                    :titolo="disco.title"
+                    :author="disco.author"
+                    :year="disco.year"
+                    />
             </div>
             <div v-else class="row">
                 <div class=" loading col-12">
@@ -15,6 +57,7 @@
                     </h2>
                 </div>
             </div>
+            
         </div>
     </main>
 </template>
@@ -34,8 +77,8 @@ export default{
     */
      data() {
         return {
-            dischiList: [],
-            genreList:[],
+            dischiList: [], 
+            select_genre: 1,
         }
     },
     mounted() {
@@ -45,17 +88,36 @@ export default{
             .then(r => {
                 this.dischiList = r.data.response;
                 console.log(this.dischiList);
-
-                this.genreList = this.dischiList.map((disco) => {
-                    return disco.genre;
-                }) 
-                console.log(this.genreList);
             })
             .catch(e => {
                 console.log(e);
             })
-        }, 1000);
-        
+        }, 2000);        
+    },
+
+    methods: {
+        change_genre(event) {
+            this.select_genre = parseInt(event.target.value); 
+            console.log(this.select_genre);
+        }
+    },
+    computed: {
+        filterList() {
+           return this.dischiList.filter((disco) => {
+                if(this.select_genre == 2 && disco.genre == "Rock") {
+                   return disco
+                }
+                else if(this.select_genre == 3 && disco.genre == "Pop") {
+                   return disco
+                }
+                else if(this.select_genre == 4 && disco.genre == "Jazz") {
+                   return disco
+                }
+                else if(this.select_genre == 5 && disco.genre == "Metal") {
+                   return disco
+                }
+            })
+        }
     }
 }
 </script>
@@ -84,5 +146,26 @@ export default{
                 box-shadow: 2px 2px 2px black;
             }
         }
+
+        .my_select {
+            margin-top: 2rem;
+            span {
+                color: #777e7d;
+                font-weight: bold;
+                font-size: 1.5rem;
+                margin-right: 1rem;
+            }
+            select {
+                background-color: $bg_card;
+                color: #777e7d;
+                border: 1px solid #777e7d;
+                font-weight: bold;
+                font-size: 1.5rem;
+                border-radius: 0.5rem;
+                box-shadow: 2px 2px 2px black;
+                padding: 0.5rem 2rem;
+            }
+
+        } 
     }
 </style>
