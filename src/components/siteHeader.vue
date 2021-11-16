@@ -5,6 +5,11 @@
                 <div class="logo">
                     <img class="img-fluid" src="../assets/Spotify_logo_without_text.svg" alt="logospotify">
                 </div>
+                <div class="my_select">
+                    <select name="select" id="select_genere">
+                        
+                    </select>
+                </div>
             </div>
         </div>
     </header>

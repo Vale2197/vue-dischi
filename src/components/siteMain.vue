@@ -35,6 +35,7 @@ export default{
      data() {
         return {
             dischiList: [],
+            genreList:[],
         }
     },
     mounted() {
@@ -42,14 +43,18 @@ export default{
         setTimeout(() => {
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
             .then(r => {
-                console.log(r.data.response);
                 this.dischiList = r.data.response;
                 console.log(this.dischiList);
+
+                this.genreList = this.dischiList.map((disco) => {
+                    return disco.genre;
+                }) 
+                console.log(this.genreList);
             })
             .catch(e => {
                 console.log(e);
             })
-        }, 2000);
+        }, 1000);
         
     }
 }
